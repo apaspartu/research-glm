@@ -21,7 +21,6 @@ def cross_entropy(y_predicted: np.ndarray, y_observed: np.ndarray) -> float:
 def d_cross_entropy(y_predicted: np.ndarray, y_observed: np.ndarray) -> np.ndarray:
     """Derivative of `cross-entropy` with respect to `softmax`,
        which in turn with respect to `y_predicted`."""
-    # return (softmax(y_predicted) - y_observed) * y_observed
     return softmax(y_predicted) - y_observed
 
 

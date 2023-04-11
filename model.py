@@ -1,8 +1,5 @@
 import numpy as np
 import funcs as fn
-import sys
-
-np.set_printoptions(threshold=sys.maxsize)
 
 
 class EncoderLSTM:
@@ -284,9 +281,7 @@ class EncodeDecoder:
 
         errors = []
 
-        for epoch in range(self.epochs):
-            print('Epoch:', epoch)
-
+        for epoch in range(1, self.epochs + 1):
             batch_loss = 0.0
             for source_input, target_input, target_output in training_samples():
                 mini_batch_size = source_input[0].shape[0]
@@ -339,18 +334,18 @@ class EncodeDecoder:
 
                 for i in range(len(self.weights)):
                     # incorporate momentum
-                    self.weight_velocities[i] = self.mu * self.weight_velocities[i] + clipped_weight_gradients[i]
+                    self.weight_velocities[i] = self.mu * self.weight_velocities[i] - clipped_weight_gradients[i]
                     self.weights[i] = self.weights[i] - self.eta * self.weight_velocities[i]
 
                 for j in range(len(self.biases)):
                     # incorporate momentum
-                    self.bias_velocities[j] = self.mu * self.bias_velocities[j] + clipped_bias_gradients[j]
+                    self.bias_velocities[j] = self.mu * self.bias_velocities[j] - clipped_bias_gradients[j]
                     self.biases[j] = self.biases[j] - self.eta * self.bias_velocities[j]
 
-            print(batch_loss)
+            print('\rEpoch:', epoch, 'Loss:', batch_loss, end='')
             errors.append(batch_loss)
 
-        print(errors)
+        print('\nTraining completed.')
         return errors
 
     def predict(self, input_sequence, start, stop):

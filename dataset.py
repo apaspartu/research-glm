@@ -18,7 +18,7 @@ def load_corpus():
 
     vocabulary = set()
 
-    for file_name in os.listdir(CORPUS_DIR):
+    for file_name in sorted(os.listdir(CORPUS_DIR)):
         with open(os.path.join(CORPUS_DIR, file_name)) as file:
             content = file.read()
 

@@ -48,9 +48,7 @@ class ModelIO:
         decoded = ''
         for output in output_sequence:
             symbol = self.one_hot_to_symbol(output)
-            print(symbol)
-            if symbol not in [BOS, EOS, PAD]:
-                decoded += symbol
+            decoded += symbol
         return decoded
 
 
@@ -63,9 +61,9 @@ def take(generator, n=10):
         i += 1
 
 
-def mini_batch(samples_factory: Callable[[], Generator[tuple[str, str], Any, None]], batch_size=10):
+def mini_batch(samples_factory: Callable[[], Generator[tuple[str, str], Any, None]], batch_size=10, sample_count=10):
     def mini_batch_factory():
-        samples = take(samples_factory(), 10)
+        samples = take(samples_factory(), sample_count)
 
         count = 0
         batch = []
