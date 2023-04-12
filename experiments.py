@@ -33,9 +33,9 @@ ed.hidden_layer_size = HIDDEN_LAYER_SIZE
 errors = ed.fit(training_batches)
 
 # prediction
-input_sequence = 'подорож'
+input_sequence = 'подорож'  # the word taken from the first text
 
-model_input = model_io.prepare_input(input_sequence)  # some word from the first text
+model_input = model_io.prepare_input(input_sequence)
 result = ed.predict(model_input, model_io.START_SYMBOL, model_io.STOP_SYMBOL)
 predicted_sequence = model_io.decode_output(result)
 
